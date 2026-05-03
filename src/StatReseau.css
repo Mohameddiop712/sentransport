@@ -1,0 +1,39 @@
+.stat-reseau {
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.stat-titre {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.stat-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #8b2252;
+}
+
+.stat-nombre {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #8b2252;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: 4px;
+}
