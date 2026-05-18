@@ -40,3 +40,16 @@
     margin-right: 12px;
   }
 }
+.aucun-resultat {
+  text-align: center;
+  color: #e74c3c;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 40px 0;
+}
+.compteur-recherche {
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: 4px;
+}
