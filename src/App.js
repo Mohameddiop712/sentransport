@@ -17,8 +17,10 @@ function App() {
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
   const [compteurRecherche, setCompteurRecherche] = useState(0);
 
-  // 3. Charger les données au démarrage
-  useEffect(() => {
+  // 3. Fonction fetch extraite
+  function chargerLignes() {
+    setChargement(true);
+    setErreur(null);
     fetch("http://localhost:5000/lignes")
       .then(response => {
         if (!response.ok) {
@@ -34,25 +36,37 @@ function App() {
         setErreur(error.message);
         setChargement(false);
       });
+  }
+
+  // 4. Charger au démarrage
+  useEffect(() => {
+    chargerLignes();
   }, []);
 
-  // 4. Filtre
+  // 5. Filtre
   const lignesFiltrees = lignes.filter(l =>
     l.depart.toLowerCase().includes(recherche.toLowerCase()) ||
     l.arrivee.toLowerCase().includes(recherche.toLowerCase()) ||
     l.numero.includes(recherche)
   );
 
-  // 5. Clic sur une ligne
+  // 6. Clic sur une ligne — fetch les détails via /lignes/<id>
   function handleClickLigne(ligne) {
     if (ligneSelectionnee && ligneSelectionnee.id === ligne.id) {
       setLigneSelectionnee(null);
     } else {
-      setLigneSelectionnee(ligne);
+      fetch("http://localhost:5000/lignes/" + ligne.id)
+        .then(response => response.json())
+        .then(data => {
+          setLigneSelectionnee(data);
+        })
+        .catch(error => {
+          console.error("Erreur chargement détails :", error);
+        });
     }
   }
 
-  // 6. Écran de chargement
+  // 7. Écran de chargement
   if (chargement) {
     return (
       <div className="App">
@@ -64,7 +78,7 @@ function App() {
     );
   }
 
-  // 7. Écran d'erreur
+  // 8. Écran d'erreur
   if (erreur) {
     return (
       <div className="App">
@@ -74,17 +88,23 @@ function App() {
             <p>Impossible de charger les lignes.</p>
             <p className="erreur-detail">{erreur}</p>
             <p>Vérifiez que le serveur Flask est lancé (python api/app.py).</p>
+            <button className="bouton-recharger" onClick={chargerLignes}>
+              🔄 Recharger
+            </button>
           </div>
         </main>
       </div>
     );
   }
 
-  // 8. Écran normal
+  // 9. Écran normal
   return (
     <div className="App">
       <Header />
       <main className="contenu">
+        <button className="bouton-recharger" onClick={chargerLignes}>
+          🔄 Recharger
+        </button>
         <Recherche valeur={recherche} onChange={(texte) => {
           setRecherche(texte);
           if (texte.length > 0) {
