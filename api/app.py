@@ -9,11 +9,15 @@ CORS(app)
 with open("lignes_ddd.json", "r") as f:
     lignes = json.load(f)
 
+# Charger les arrets GPS
+with open("arrets.json", "r") as f:
+    arrets = json.load(f)
+
 @app.route("/")
 def accueil():
     return jsonify({
         "message": "Bienvenue sur l'API SenTransport !",
-        "endpoints": ["/lignes", "/lignes/<id>", "/arrets", "/stats", "/lignes/recherche?q="]
+        "endpoints": ["/lignes", "/lignes/<id>", "/arrets", "/arrets-geo", "/stats", "/lignes/recherche?q="]
     })
 
 @app.route("/lignes")
@@ -37,6 +41,10 @@ def get_arrets():
         for arret in ligne["listeArrets"]:
             tous_arrets.add(arret)
     return jsonify(sorted(list(tous_arrets)))
+
+@app.route("/arrets-geo")
+def get_arrets_geo():
+    return jsonify(arrets)
 
 @app.route("/stats")
 def get_stats():

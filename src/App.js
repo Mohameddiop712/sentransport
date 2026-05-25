@@ -5,13 +5,14 @@ import Recherche from './Recherche';
 import LigneBus from './LigneBus';
 import DetailLigne from './DetailLigne';
 import Footer from './Footer';
+import Carte from './Carte';
 
 function App() {
   // 1. Trois états pour gérer le fetch
   const [lignes, setLignes] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
-  
+
   // 2. Les autres états
   const [recherche, setRecherche] = useState("");
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
@@ -132,8 +133,8 @@ function App() {
             onClick={() => handleClickLigne(ligne)}
           />
         ))}
-        {ligneSelectionnee
-          && <DetailLigne ligne={ligneSelectionnee} />}
+        {ligneSelectionnee && <DetailLigne ligne={ligneSelectionnee} />}
+        <Carte /> {/* NOUVEAU - Lab 6 */}
       </main>
       <Footer />
     </div>
