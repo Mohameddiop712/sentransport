@@ -1,0 +1,56 @@
+.previsions {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 8px;
+  border: 1px solid #dcdde1;
+}
+
+.previsions-titre {
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+  font-size: 0.95rem;
+}
+
+.previsions-liste {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.prevision-item {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.prevision-date {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin: 0 0 4px 0;
+  text-transform: capitalize;
+}
+
+.prevision-icone {
+  width: 40px;
+  height: 40px;
+}
+
+.prevision-temp {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.prevision-desc {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  margin: 4px 0 0 0;
+  text-transform: capitalize;
+}

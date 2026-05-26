@@ -18,10 +18,46 @@
 .arret-proche {
   color: #0a6e31;
   font-size: 0.95rem;
-  margin: 0 0 12px 0;
-  padding: 8px 12px;
+  margin: 0 0 6px 0;
+  padding: 6px 12px;
   background-color: #e8f5e9;
   border-radius: 6px;
+}
+
+.arret-proche-premier {
+  font-weight: bold;
+  background-color: #c8e6c9;
+  border-left: 4px solid #2e7d32;
+}
+
+.arrets-proches-liste {
+  margin-bottom: 12px;
+}
+
+.arrets-proches-titre {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.bouton-centrer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: white;
+  border: 2px solid #2c3e50;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.bouton-centrer:hover {
+  background: #2c3e50;
+  color: white;
 }
 
 @media (max-width: 600px) {

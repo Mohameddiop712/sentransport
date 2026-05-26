@@ -6,19 +6,19 @@ import LigneBus from './LigneBus';
 import DetailLigne from './DetailLigne';
 import Footer from './Footer';
 import Carte from './Carte';
+import Meteo from './Meteo';
+import SignalerIncident from './SignalerIncident';
+import ListeIncidents from './ListeIncidents';
+import Previsions from './Previsions';
 
 function App() {
-  // 1. Trois états pour gérer le fetch
   const [lignes, setLignes] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
-
-  // 2. Les autres états
   const [recherche, setRecherche] = useState("");
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
   const [compteurRecherche, setCompteurRecherche] = useState(0);
 
-  // 3. Fonction fetch extraite
   function chargerLignes() {
     setChargement(true);
     setErreur(null);
@@ -39,19 +39,16 @@ function App() {
       });
   }
 
-  // 4. Charger au démarrage
   useEffect(() => {
     chargerLignes();
   }, []);
 
-  // 5. Filtre
   const lignesFiltrees = lignes.filter(l =>
     l.depart.toLowerCase().includes(recherche.toLowerCase()) ||
     l.arrivee.toLowerCase().includes(recherche.toLowerCase()) ||
     l.numero.includes(recherche)
   );
 
-  // 6. Clic sur une ligne — fetch les détails via /lignes/<id>
   function handleClickLigne(ligne) {
     if (ligneSelectionnee && ligneSelectionnee.id === ligne.id) {
       setLigneSelectionnee(null);
@@ -67,7 +64,6 @@ function App() {
     }
   }
 
-  // 7. Écran de chargement
   if (chargement) {
     return (
       <div className="App">
@@ -79,7 +75,6 @@ function App() {
     );
   }
 
-  // 8. Écran d'erreur
   if (erreur) {
     return (
       <div className="App">
@@ -98,11 +93,12 @@ function App() {
     );
   }
 
-  // 9. Écran normal
   return (
     <div className="App">
       <Header />
       <main className="contenu">
+        <Meteo /> {/* NOUVEAU */}
+        <Previsions /> {/* Exercice 2 */}
         <button className="bouton-recharger" onClick={chargerLignes}>
           🔄 Recharger
         </button>
@@ -134,7 +130,9 @@ function App() {
           />
         ))}
         {ligneSelectionnee && <DetailLigne ligne={ligneSelectionnee} />}
-        <Carte /> {/* NOUVEAU - Lab 6 */}
+        <Carte />
+        <SignalerIncident /> {/* NOUVEAU */}
+        <ListeIncidents /> {/* Exercice 1 */}
       </main>
       <Footer />
     </div>
